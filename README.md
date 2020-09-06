@@ -1,4 +1,4 @@
-# # JBA Risk Code Challenge
+# JBA Risk Code Challenge
 
 This Repository contains a python project that can read in a CSV containing water depth, apply a vulnerability curve, and calculate the damage per pixel.
 
