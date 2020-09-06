@@ -16,7 +16,7 @@ if __name__ == "__main__":
                         help='What percent of the area was inundated, default is 100 percent', default=100)
     parser.add_argument('-pix', '--pixel_size', help='Pixel size', default=10)
     parser.add_argument('-o', '--output', help='Output file name, default is DepthDamage.csv',
-                        default='result/DepthDamage.csv')
+                        default='DepthDamage.csv')
 
     args = parser.parse_args()
     risk_df = CalculateRisk(args.input_depth, args.input_vulnerability,
