@@ -36,10 +36,10 @@ class CalculateRisk(ReadCSV):
         risk = []
         for i in depth_array:
             if i > self.risk_df['DepthUpperBound (m)'].max():
-                print('Depth is {}m, this is greater than the upper limit of the vulnerability curve'.format(i))
+                logging.info('Depth is {}m, this is greater than the upper limit of the vulnerability curve'.format(i))
                 risk.append(np.nan)
             elif i < self.risk_df['DepthLowerBound (m)'].min():
-                print('Depth is {}m, this is greater than the upper limit of the vulnerability curve'.format(i))
+                logging.info('Depth is {}m, this is less than the lower limit of the vulnerability curve'.format(i))
                 risk.append(np.nan)
             else:
                 for row in risk_array:
@@ -63,14 +63,6 @@ class CalculateRisk(ReadCSV):
 
     def total_area(self):
         return self.total_rows() * (self.pixel_size**2)
-
-    def print_statistics(self):
-        """
-        Logs key statistics to the command line
-        """
-        logging.info("Average risk for the inundated areas: £{}".format(self.average_inundated_risk()))
-        logging.info("Average risk for the total area £{}".format(self.average_risk_total_area()))
-        logging.info("Size of the area: {}".format(self.total_area()))
 
     def release_memory(self):
         """
