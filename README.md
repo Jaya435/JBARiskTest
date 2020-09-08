@@ -55,13 +55,16 @@ optional arguments:
                         percent
   -pix PIXEL_SIZE, --pixel_size PIXEL_SIZE
                         Pixel size
+  -stats [STATISTICS], --statistics [STATISTICS]
+                        Set to True if you want to calculate statistics and
+                        save to CSV
   -o OUTPUT, --output OUTPUT
                         Output file name, default is DepthDamage.csv
 ```
 
 Once the programme is run, you can view the data stored in the system by viewing the CSV file that has been output. Unless specificed this will be called DepthDamage.csv
 
-Additional statistics are output to the terminal and can be viewed once the programme has run.
+Additional statistics can be calculated by setting the -stats flag to True
 
 ## Running the tests
 
