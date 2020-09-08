@@ -28,11 +28,11 @@ https://github.com/Jaya435/JBARiskTest.git
 ```
 Then run
 ```
-python main.py -id depths.csv -iv vulnerability_curve.csv -pix 10 -pct_inun 50 -o result/test_output.csv
+python main.py -id depths.csv -iv vulnerability_curve.csv -pix 10 -pct_inun 50 -o test_output.csv
 ```
 The --output flag is optional and defines the name of the output CSV that will be generated.
 
-The -pct_inun corresponds to the percentge of the area that was inundated with water
+The -pct_inun corresponds to the percentage of the area that was inundated with water
 
 The -pix flag refers to the size of the grid being used for each depth measurement
 
