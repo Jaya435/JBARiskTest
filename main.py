@@ -16,13 +16,16 @@ if __name__ == "__main__":
     parser.add_argument('-pct_inun', '--percentage_inundated',
                         help='What percent of the area was inundated, default is 100 percent', default=100)
     parser.add_argument('-pix', '--pixel_size', help='Pixel size', default=10)
-    parser.add_argument('-stats', '--statistics', nargs='?', default=None, help='Calculate statistics and save to CSV')
+    parser.add_argument('-stats', '--statistics', nargs='?', default=None,
+                        help='Set to True if you want to calculate statistics and save to CSV')
     parser.add_argument('-o', '--output', help='Output file name, default is DepthDamage.csv',
                         default='DepthDamage.csv')
 
     args = parser.parse_args()
-    risk_df = CalculateRisk(args.input_depth, args.input_vulnerability,
+    if args.statistics:
+        risk_df = CalculateStatistics(args.input_depth, args.input_vulnerability,
+                                args.percentage_inundated, args.pixel_size)
+    else:
+        risk_df = CalculateRisk(args.input_depth, args.input_vulnerability,
                             args.percentage_inundated, args.pixel_size)
     risk_df.save_to_csv(args.output)
-    if args.statistics:
-        CalculateStatistics()
