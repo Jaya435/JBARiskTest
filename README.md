@@ -30,7 +30,7 @@ Then run
 ```
 python main.py -id depths.csv -iv vulnerability_curve.csv -pix 10 -pct_inun 50 -o result/test_output.csv
 ```
-The --output flag is optional and defines the name of the database that will be created when the programme is run.
+The --output flag is optional and defines the name of the output CSV that will be generated.
 
 The -pct_inun corresponds to the percentge of the area that was inundated with water
 
