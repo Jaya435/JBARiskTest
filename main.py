@@ -4,7 +4,11 @@ import argparse
 
 from ExpectedDamage.calculate_risk import CalculateRisk
 from ExpectedDamage.calculate_statistics import CalculateStatistics
+import datetime
+import logging
+import sys
 
+logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 if __name__ == "__main__":
     # create parser
     parser = argparse.ArgumentParser(description='Read a depth CSV, apply a vulnerability curve and output a CSV of '
@@ -22,6 +26,7 @@ if __name__ == "__main__":
                         default='DepthDamage.csv')
 
     args = parser.parse_args()
+    start_time = datetime.datetime.now()
     if args.statistics:
         risk_df = CalculateStatistics(args.input_depth, args.input_vulnerability,
                                 args.percentage_inundated, args.pixel_size)
@@ -29,3 +34,4 @@ if __name__ == "__main__":
         risk_df = CalculateRisk(args.input_depth, args.input_vulnerability,
                             args.percentage_inundated, args.pixel_size)
     risk_df.save_to_csv(args.output)
+    logging.info("Data saved to CSV in {} seconds".format(datetime.datetime.now() - start_time))

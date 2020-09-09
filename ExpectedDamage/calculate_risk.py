@@ -1,5 +1,6 @@
 from .read_file import ReadCSV
 import numpy as np
+import datetime
 import logging
 import sys
 
@@ -31,14 +32,17 @@ class CalculateRisk(ReadCSV):
         Applies the vulnerability curve to the depth of water
         :return: a pandas dataframe of the depth, with an updated column containing the damage cost
         """
+        start_time = datetime.datetime.now()
         depth_array = self.df.to_numpy()
         risk_array = self.risk_df.to_numpy()
+        risk_max = self.risk_df['DepthUpperBound (m)'].max()
+        risk_min = self.risk_df['DepthLowerBound (m)'].min()
         risk = []
         for i in depth_array:
-            if i > self.risk_df['DepthUpperBound (m)'].max():
+            if i > risk_max:
                 logging.info('Depth is {}m, this is greater than the upper limit of the vulnerability curve'.format(i))
                 risk.append(np.nan)
-            elif i < self.risk_df['DepthLowerBound (m)'].min():
+            elif i < risk_min:
                 logging.info('Depth is {}m, this is less than the lower limit of the vulnerability curve'.format(i))
                 risk.append(np.nan)
             else:
@@ -47,6 +51,7 @@ class CalculateRisk(ReadCSV):
                         risk.append(row[2])
 
         self.df['Damage (GBP)'] = risk
+        logging.info("Vulnerability calculated in in {} seconds".format(datetime.datetime.now() - start_time))
         return self.risk_df
 
     def average_inundated_risk(self):
